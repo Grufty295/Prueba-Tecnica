@@ -1,0 +1,30 @@
+.contenedor {
+  background-color: green;
+  border: 2px solid blue;
+  padding: 1rem;
+  display: flex;
+  gap: 1rem;
+  transition: background-color 1s;
+  animation: girar 4s infinite ease;
+}
+
+.items {
+  flex: 1;
+  height: 100px;
+  background-color: yellow;
+}
+
+@media screen and (max-width: 600px) {
+  .contenedor {
+    background-color: red;
+  }
+}
+
+@keyframes girar {
+  from{
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
