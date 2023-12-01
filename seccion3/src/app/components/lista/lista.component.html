@@ -1,0 +1,31 @@
+<form (ngSubmit)="fetchPost(search.value)">
+    <input #search type="text" placeholder="Búsqueda por id..." />
+    <button [disabled]="loading$ | async">Búscar</button>
+</form>
+
+<ul *ngIf="postList$ | async as posts; else loadingOrError">    
+    <li *ngFor="let post of posts | slice:0:5">
+        <pre> {{ post | json }} </pre>
+    </li>
+</ul>
+<ng-template #loadingOrError>
+    <div *ngIf="loading$ | async; else error">
+        Cargando...
+    </div>
+    <ng-template #error>
+        <div *ngIf="error$ | async as errorMessage">
+            {{ errorMessage }}
+        </div>
+    </ng-template>
+</ng-template>
+
+<hr>
+<form (ngSubmit)="createPost(title.value, body.value)">
+    <input #title type="text" placeholder="Título del post..." />
+    <input #body type="text" placeholder="Cuerpo del post..." />
+    <button [disabled]="loading$ | async">Crear post</button>
+</form>
+
+<div *ngIf="successMessage$ | async as successMessage">
+    {{ successMessage }}
+</div>
